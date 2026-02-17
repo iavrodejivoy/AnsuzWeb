@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация - Ansuz</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="themes.css" />
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <meta name="theme-color" content="#bb86fc" />
+    <meta name="msapplication-TileColor" content="#bb86fc" />
+    <meta name="msapplication-TileImage" content="icon.png" />
+  </head>
+  <div class="container">
+    <header class="header">
+      <h1>Ansuz</h1>
+      <nav>
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="about.html" class="nav-link">О нас</a>
+        <a href="app.html" class="nav-link">О приложении</a>
+        <a href="download.html" class="nav-link">Скачать</a>
+        <a href="login.html" class="nav-link active">Аккаунт</a>
+      </nav>
+    </header>
+
+    <body>
+      <main>
+        <section class="auth-section">
+          <div class="auth-container">
+            <h1>Создание аккаунта</h1>
+            <form id="registerForm">
+              <div class="form-group">
+                <label for="username">Имя пользователя</label>
+                <input type="text" id="username" name="username" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required />
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Подтвердите пароль</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="firstName">Имя</label>
+                <input type="text" id="firstName" name="firstName" />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Фамилия</label>
+                <input type="text" id="lastName" name="lastName" />
+              </div>
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms"
+                  >Я принимаю
+                  <a href="terms.html" style="text-decoration: none"
+                    >Условия использования</a
+                  >
+                  и
+                  <a href="conf.html" style="text-decoration: none"
+                    >Политику конфиденциальности</a
+                  ></label
+                >
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Создать аккаунт
+              </button>
+            </form>
+            <p class="auth-link">
+              Уже есть аккаунт? <a href="login.html">Войти</a>
+            </p>
+          </div>
+        </section>
+      </main>
+    </body>
+
+    <footer class="footer">
+      <p>
+        &copy; 2026 Ansuz. Все права защищены. |
+        <a href="terms.html">Условия использования</a> |
+        <a href="privacy.html">Политика конфиденциальности</a>
+      </p>
+    </footer>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+          if (password !== confirmPassword) {
+            alert("Пароли не совпадают!");
+            return;
+          }
+
+          if (password.length < 6) {
+            alert("Пароль должен быть не менее 6 символов!");
+            return;
+          }
+
+          alert(
+            "Регистрация прошла успешно! Добро пожаловать, " + username + "!",
+          );
+          // Здесь можно добавить отправку данных на сервер
+        });
+    </script>
+  </div>
+</html>
