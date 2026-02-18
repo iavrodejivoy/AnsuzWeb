@@ -37,6 +37,17 @@ h3 {
   margin: 0;
 }
 
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+  opacity: 0.8;
+}
+
 nav {
   display: flex;
   gap: 30px;
@@ -203,7 +214,7 @@ nav {
 
 .feature-card {
   text-align: center;
-  padding: 40px 30px;
+  padding: 40px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   backdrop-filter: blur(10px);
@@ -224,15 +235,13 @@ nav {
 }
 
 .feature-icon {
-  font-size: 64px;
-  margin-bottom: 25px;
-  display: block;
+  height: 64px;
 }
 
 .feature-card h4 {
   color: #bb86fc;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin: 10px 0;
   font-weight: 600;
 }
 
@@ -240,6 +249,7 @@ nav {
   color: var(--text-secondary);
   line-height: 1.6;
   font-size: 16px;
+  margin: 0;
 }
 
 .about-section {
@@ -252,8 +262,7 @@ nav {
 .about-section h2 {
   color: #bb86fc;
   font-size: 36px;
-  margin-bottom: 20px;
-  margin-top: 0;
+  margin: 0;
 }
 
 .about-section p {
@@ -264,7 +273,7 @@ nav {
 }
 
 .about-section hr {
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .team-grid {
@@ -282,8 +291,7 @@ nav {
 }
 
 .member-avatar {
-  font-size: 48px;
-  margin-bottom: 20px;
+  height: 128px;
 }
 
 .team-member h3 {
@@ -294,6 +302,7 @@ nav {
 .team-member p {
   color: var(--text-secondary);
   font-size: 16px;
+  margin: 0;
 }
 
 .app-info {
@@ -526,12 +535,12 @@ nav {
 .auth-container h1 {
   color: #bb86fc;
   font-size: 36px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 
 .form-group {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
@@ -544,13 +553,14 @@ nav {
 
 .form-group input {
   width: 100%;
-  padding: 15px 0;
+  padding: 15px;
   border: 1px solid rgba(187, 134, 252, 0.3);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   color: #e0e0e0;
   font-size: 16px;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -564,16 +574,53 @@ nav {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 30px;
+  margin: 0 0 15px 0;
 }
 
-.form-group.checkbox-group input {
-  width: auto;
+.form-group.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid rgba(187, 134, 252, 0.5);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group.checkbox-group input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #bb86fc, #9c6de8);
+  border-color: #bb86fc;
+}
+
+.form-group.checkbox-group input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #1a1a1a;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.form-group.checkbox-group input[type="checkbox"]:hover {
+  border-color: #bb86fc;
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.1);
 }
 
 .form-group.checkbox-group label {
   margin-bottom: 0;
   font-size: 14px;
+  cursor: pointer;
+  color: var(--text-secondary);
 }
 
 .form-group.checkbox-group a {
@@ -586,7 +633,8 @@ nav {
 }
 
 .auth-link {
-  margin-top: 30px;
+  margin: 0;
+  margin-top: 15px;
   color: var(--text-secondary);
   font-size: 16px;
 }

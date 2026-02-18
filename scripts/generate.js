@@ -37,7 +37,15 @@ function generatePage(mdFile, htmlFile, title) {
       <body>
         <div class="container">
           <header class="header">
-            <h1>Ansuz</h1>
+            <a href="index.html" class="header-logo">
+              <img
+                src="icons/ansuz.svg"
+                alt="icon"
+                height="32px"
+                style="margin-right: 10px"
+              />
+              <h1>Ansuz</h1>
+            </a>
             <nav>
             <a href="index.html" class="nav-link">Главная</a>
             <a href="about.html" class="nav-link">О нас</a>
