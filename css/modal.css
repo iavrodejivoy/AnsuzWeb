@@ -1,0 +1,109 @@
+/* ── Modal ── */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #241f3a;
+  margin: 0;
+  padding: 30px;
+  border: 1px solid rgba(187, 134, 252, 0.3);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease;
+}
+
+.close-modal {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  color: var(--text-secondary);
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #bb86fc;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Changelog toggle ── */
+
+.changelog-content {
+  display: none;
+  padding: 20px 0;
+}
+
+.changelog-content.active {
+  display: block;
+}
+
+.changelog-item {
+  padding: 15px 0;
+  color: var(--text-secondary);
+  font-size: 1.2em;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(187, 134, 252, 0.1);
+}
+
+.changelog-item:last-child {
+  border-bottom: none;
+}
+
+.toggle-btn {
+  width: 100%;
+  padding: 15px 20px;
+  background: var(--bg-primary);
+  border: 1px solid rgba(187, 134, 252, 0.3);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(187, 134, 252, 0.1);
+  border-color: #bb86fc;
+}
+
+.toggle-arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #bb86fc;
+  transition: transform 0.3s ease;
+}
+
+.toggle-btn.active .toggle-arrow {
+  transform: rotate(180deg);
+}

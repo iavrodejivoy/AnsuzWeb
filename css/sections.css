@@ -1,0 +1,356 @@
+/* ── Layout ── */
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+}
+
+.main-content-hor {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  flex: 1;
+}
+
+/* ── Features ── */
+
+.features {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(187, 134, 252, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.features h3 {
+  color: #bb86fc;
+  font-size: 36px;
+  margin: 0 0 40px 0;
+  text-align: center;
+  position: relative;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(187, 134, 252, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  box-shadow: 0 20px 40px rgba(187, 134, 252, 0.2);
+  border-color: #bb86fc;
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-icon {
+  height: 64px;
+}
+
+.feature-card h4 {
+  color: #bb86fc;
+  font-size: 24px;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ── About ── */
+
+.about-section {
+  height: fit-content;
+  padding: 25px;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  color: #e0e0e0;
+}
+
+.about-section h1 {
+  color: #bb86fc;
+  font-size: 42px;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.about-section h2 {
+  color: #bb86fc;
+  font-size: 36px;
+  margin: 0;
+}
+
+.about-section h3 {
+  color: var(--text-secondary);
+  margin: 0;
+  margin-top: 15px;
+}
+
+.about-section p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+
+.about-section li {
+  font-size: 18px;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+
+.about-section a {
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text-primary);
+  text-align: justify;
+}
+
+.about-section hr {
+  margin: 20px 0;
+}
+
+/* ── Team ── */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.team-member {
+  text-align: center;
+  padding: 30px;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+.member-avatar {
+  height: 128px;
+}
+
+.team-member h3 {
+  color: #bb86fc;
+  margin-bottom: 10px;
+}
+
+.team-member p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ── App info ── */
+
+.app-info {
+  text-align: center;
+  color: #e0e0e0;
+}
+
+.app-info h2 {
+  color: #bb86fc;
+  font-size: 36px;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.app-info p {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: var(--text-secondary);
+}
+
+.app-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.feature-item {
+  background: var(--bg-primary);
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(187, 134, 252, 0.2);
+  text-align: center;
+}
+
+.feature-item h3 {
+  color: #bb86fc;
+  margin-bottom: 15px;
+}
+
+.feature-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Tech stack ── */
+
+.tech-stack {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+.tech-stack h3 {
+  color: #bb86fc;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.tech-item {
+  text-align: center;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(187, 134, 252, 0.1);
+}
+
+.tech-item h4 {
+  color: #bb86fc;
+  margin-bottom: 15px;
+}
+
+.tech-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Download ── */
+
+.download-section {
+  text-align: center;
+  color: #e0e0e0;
+}
+
+.download-section h2 {
+  color: #bb86fc;
+  font-size: 36px;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.download-section p {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: var(--text-secondary);
+}
+
+.download-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.download-card {
+  background: var(--bg-primary);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(187, 134, 252, 0.2);
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.download-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 40px rgba(58, 42, 77, 0.3);
+}
+
+.download-card h3 {
+  color: #bb86fc;
+  margin: 0 0 15px 0;
+}
+
+.download-card p {
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.platform-icon {
+  width: 128px;
+  height: 128px;
+  vertical-align: middle;
+  fill: #bb86fc;
+}
+
+.file-size {
+  color: var(--text-muted);
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/* ── Changelog ── */
+
+.changelog {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+.changelog h3 {
+  color: #bb86fc;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.changelog ul {
+  list-style: none;
+  padding: 0;
+}
+
+.changelog li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(187, 134, 252, 0.1);
+  color: var(--text-secondary);
+}
+
+.changelog li:last-child {
+  border-bottom: none;
+}

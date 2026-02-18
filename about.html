@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ansuz – Обо мне</title>
-    <link rel="stylesheet" href="themes.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="icon.png" />
-    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" type="image/png" href="icons/icon.png" />
+    <link rel="apple-touch-icon" href="icons/icon.png" />
     <meta name="theme-color" content="#bb86fc" />
     <meta name="msapplication-TileColor" content="#bb86fc" />
-    <meta name="msapplication-TileImage" content="icon.png" />
+    <meta name="msapplication-TileImage" content="icons/icon.png" />
   </head>
   <body>
     <div class="container">
@@ -25,11 +24,11 @@
           <h1>Ansuz</h1>
         </a>
         <nav>
-          <a href="index.html" class="nav-link">Главная</a>
-          <a href="about.html" class="nav-link active">О нас</a>
-          <a href="app.html" class="nav-link">О приложении</a>
-          <a href="download.html" class="nav-link">Скачать</a>
-          <a href="login.html" class="nav-link">Аккаунт</a>
+          <a href="index.html" class="nav-link" data-page="index">Главная</a>
+          <a href="about.html" class="nav-link active" data-page="about">О нас</a>
+          <a href="app.html" class="nav-link" data-page="app">О приложении</a>
+          <a href="download.html" class="nav-link" data-page="download">Скачать</a>
+          <a href="login.html" class="nav-link" data-page="account" id="navAccount" style="display: flex; align-items: center;">Аккаунт <img src="icons/account.svg" alt="account" style="height: 21px; margin-left: 5px;"/></a>
         </nav>
       </header>
       <main class="main-content-hor">
@@ -74,13 +73,14 @@
           </p>
         </section>
       </main>
-    </div>
-  </body>
-  <footer class="footer">
+    <footer class="footer">
     <p>
       &copy; 2026 Ansuz. Все права защищены. |
       <a href="terms.html">Условия использования</a> |
       <a href="privacy.html">Политика конфиденциальности</a>
     </p>
   </footer>
+    </div>
+  </body>
+
 </html>

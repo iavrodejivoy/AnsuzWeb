@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ansuz – Скачать</title>
-    <link rel="stylesheet" href="themes.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="icon.png" />
-    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" type="image/png" href="icons/icon.png" />
+    <link rel="apple-touch-icon" href="icons/icon.png" />
     <meta name="theme-color" content="#bb86fc" />
     <meta name="msapplication-TileColor" content="#bb86fc" />
-    <meta name="msapplication-TileImage" content="icon.png" />
+    <meta name="msapplication-TileImage" content="icons/icon.png" />
   </head>
   <body>
     <div class="container">
@@ -25,11 +24,11 @@
           <h1>Ansuz</h1>
         </a>
         <nav>
-          <a href="index.html" class="nav-link">Главная</a>
-          <a href="about.html" class="nav-link">О нас</a>
-          <a href="app.html" class="nav-link">О приложении</a>
-          <a href="download.html" class="nav-link active">Скачать</a>
-          <a href="login.html" class="nav-link">Аккаунт</a>
+          <a href="index.html" class="nav-link" data-page="index">Главная</a>
+          <a href="about.html" class="nav-link" data-page="about">О нас</a>
+          <a href="app.html" class="nav-link" data-page="app">О приложении</a>
+          <a href="download.html" class="nav-link active" data-page="download">Скачать</a>
+          <a href="login.html" class="nav-link" data-page="account" id="navAccount" style="display: flex; align-items: center;">Аккаунт <img src="icons/account.svg" alt="account" style="height: 21px; margin-left: 5px;"/></a>
         </nav>
       </header>
       <main class="main-content">
@@ -40,13 +39,13 @@
             <div class="download-card">
               <img class="platform-icon" src="icons/windows.svg"></img>
               <h3>Windows 10/11</h3>
-              <a href="#" class="btn btn-primary">Скачать .exe</a>
+              <a href="downloads/Ansuz-1.0-setup.exe" download class="btn btn-primary">Скачать .exe</a>
               <p class="file-size">25 MB</p>
             </div>
             <div class="download-card">
               <img class="platform-icon" src="icons/android.svg"></img>
               <h3>Android</h3>
-              <a href="#" class="btn btn-primary">Скачать .apk</a>
+              <a href="downloads/Ansuz-1.0.apk" download class="btn btn-primary">Скачать .apk</a>
               <p class="file-size">15 MB</p>
             </div>
           </div>
@@ -72,14 +71,14 @@
           </button>
         </section>
       </main>
+      <footer class="footer">
+        <p>
+          &copy; 2026 Ansuz. Все права защищены. |
+          <a href="terms.html">Условия использования</a> |
+          <a href="privacy.html">Политика конфиденциальности</a>
+        </p>
+      </footer>
     </div>
+  <script src="scripts/changelog.js"></script>
   </body>
-  <footer class="footer">
-    <p>
-      &copy; 2026 Ansuz. Все права защищены. |
-      <a href="terms.html">Условия использования</a> |
-      <a href="privacy.html">Политика конфиденциальности</a>
-    </p>
-  </footer>
-<script src="scripts/changelog.js"></script>
 </html>

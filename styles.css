@@ -15,6 +15,15 @@ h3 {
   max-width: 70vw;
   margin: 0 auto;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container > main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -50,7 +59,7 @@ h3 {
 
 nav {
   display: flex;
-  gap: 30px;
+  gap: 15px;
 }
 
 .nav-link {
@@ -72,12 +81,14 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  flex: 1;
 }
 
 .main-content-hor {
   display: flex;
   flex-direction: row;
   gap: 40px;
+  flex: 1;
 }
 
 .hero {
@@ -253,10 +264,19 @@ nav {
 }
 
 .about-section {
+  height: fit-content;
   padding: 25px;
   background: var(--bg-primary);
   border-radius: 8px;
   color: #e0e0e0;
+}
+
+.about-section h1 {
+  color: #bb86fc;
+  font-size: 42px;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .about-section h2 {
@@ -265,10 +285,29 @@ nav {
   margin: 0;
 }
 
+.about-section h3 {
+  color: var(--text-secondary);
+  margin: 0;
+  margin-top: 15px;
+}
+
 .about-section p {
   font-size: 18px;
   margin-bottom: 20px;
   color: var(--text-secondary);
+  text-align: justify;
+}
+
+.about-section li {
+  font-size: 18px;
+  color: var(--text-secondary);
+  text-align: justify;
+}
+
+.about-section a {
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text-primary);
   text-align: justify;
 }
 
@@ -489,17 +528,12 @@ nav {
 .footer {
   text-align: center;
   color: var(--text-secondary);
-  position: fixed;
-  bottom: 0;
   padding: 10px 20px;
   background: var(--bg-primary);
   border: 1px solid rgba(187, 134, 252, 0.2);
   border-bottom: none;
   border-radius: 8px 8px 0 0;
-  z-index: 100;
-  max-width: 1200px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 40px;
 }
 
 .footer a {
@@ -516,7 +550,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  flex: 1;
   padding: 40px 20px;
 }
 
@@ -648,6 +682,109 @@ nav {
   text-decoration: underline;
 }
 
+/* Страница аккаунта */
+.account-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #bb86fc, #9c6de8);
+  color: #1a1a1a;
+  font-size: 36px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  box-shadow: 0 8px 24px rgba(187, 134, 252, 0.35);
+  user-select: none;
+}
+
+.account-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.account-info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(187, 134, 252, 0.2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.account-info-label {
+  font-size: 12px;
+  color: var(--text-muted, #888);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.account-info-value {
+  font-size: 16px;
+  color: #e0e0e0;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* Поле пароля с кнопкой показа */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  padding-right: 50px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-secondary, #aaa);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: #bb86fc;
+}
+
+.password-toggle svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.auth-message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.auth-message--error {
+  background: rgba(207, 102, 121, 0.15);
+  border: 1px solid rgba(207, 102, 121, 0.5);
+  color: #cf6679;
+}
+
+.auth-message--success {
+  background: rgba(79, 193, 132, 0.15);
+  border: 1px solid rgba(79, 193, 132, 0.5);
+  color: #4fc184;
+}
+
 @keyframes float {
   0%,
   100% {
@@ -679,16 +816,20 @@ nav {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
-  background-color: var(--bg-primary);
-  margin: 5% auto;
+  background-color: #241f3a;
+  margin: 0;
   padding: 30px;
   border: 1px solid rgba(187, 134, 252, 0.3);
   border-radius: 8px;
   width: 90%;
   max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
   animation: modalSlideIn 0.3s ease;
 }

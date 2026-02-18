@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ansuz – Аккаунт</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" type="image/png" href="icons/icon.png" />
+    <link rel="apple-touch-icon" href="icons/icon.png" />
+    <meta name="theme-color" content="#bb86fc" />
+    <meta name="msapplication-TileColor" content="#bb86fc" />
+    <meta name="msapplication-TileImage" content="icons/icon.png" />
+    <script>if (!localStorage.getItem("ansuz_session")) location.replace("login.html");</script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <a href="index.html" class="header-logo">
+          <img
+            src="icons/ansuz.svg"
+            alt="icon"
+            height="32px"
+            style="margin-right: 10px"
+          />
+          <h1>Ansuz</h1>
+        </a>
+        <nav>
+          <a href="index.html" class="nav-link" data-page="index">Главная</a>
+          <a href="about.html" class="nav-link" data-page="about">О нас</a>
+          <a href="app.html" class="nav-link" data-page="app">О приложении</a>
+          <a href="download.html" class="nav-link" data-page="download">Скачать</a>
+          <a href="account.html" class="nav-link active" data-page="account" id="navAccount" style="display: flex; align-items: center;">Аккаунт <img src="icons/account.svg" alt="account" style="height: 21px; margin-left: 5px;"/></a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="auth-section">
+          <div class="auth-container" style="max-width: 600px;">
+            <div id="accountView">
+              <div class="account-avatar" id="accountAvatar">?</div>
+
+              <h1 id="accountUsername" style="margin: 16px 0 4px;">—</h1>
+              <p id="accountEmail" style="color: var(--text-secondary); margin: 0 0 30px;">—</p>
+
+              <div class="account-info-grid">
+                <div class="account-info-card">
+                  <span class="account-info-label">Имя</span>
+                  <span class="account-info-value" id="accountFirstName">—</span>
+                </div>
+                <div class="account-info-card">
+                  <span class="account-info-label">Фамилия</span>
+                  <span class="account-info-value" id="accountLastName">—</span>
+                </div>
+                <div class="account-info-card" style="grid-column: 1 / -1;">
+                  <span class="account-info-label">Email</span>
+                  <span class="account-info-value" id="accountEmailFull">—</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="openEditModal()">Редактировать профиль</button>
+                <button class="btn btn-secondary" onclick="handleProjectsStub()">Мои проекты</button>
+                <button class="btn btn-secondary" onclick="handleLogout()">Выйти</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div id="editModal" class="modal">
+        <div class="modal-content" style="max-width: 480px;">
+          <span class="close-modal" onclick="closeEditModal()" style="font-size: 22px; cursor: pointer;">✕</span>
+          <h2 style="color: #bb86fc; margin: 0 0 24px;">Редактировать профиль</h2>
+          <form id="editForm">
+            <div class="form-group">
+              <label for="editUsername">Имя пользователя</label>
+              <input type="text" id="editUsername" name="editUsername" required />
+            </div>
+            <div class="form-group">
+              <label for="editFirstName">Имя</label>
+              <input type="text" id="editFirstName" name="editFirstName" />
+            </div>
+            <div class="form-group">
+              <label for="editLastName">Фамилия</label>
+              <input type="text" id="editLastName" name="editLastName" />
+            </div>
+            <div class="form-group">
+              <label for="editEmail">Email</label>
+              <input type="email" id="editEmail" name="editEmail" required />
+            </div>
+            <div id="editMessage" class="auth-message" style="display:none; margin-bottom: 16px;"></div>
+            <div style="display: flex; gap: 12px;">
+              <button type="submit" class="btn btn-primary" style="flex: 1;">Сохранить</button>
+              <button type="button" class="btn btn-secondary" onclick="closeEditModal()" style="flex: 1;">Отмена</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="projectsModal" class="modal">
+        <div class="modal-content" style="max-width: 480px; text-align: center;">
+          <span class="close-modal" onclick="closeProjectsModal()" style="font-size: 22px; cursor: pointer;">✕</span>
+          <h2 style="color: #bb86fc; margin: 0 0 16px;">Мои проекты</h2>
+          <p style="color: var(--text-secondary); margin: 0 0 24px;">Функция находится в разработке. Скоро здесь появится список ваших проектов.</p>
+          <button class="btn btn-primary" onclick="closeProjectsModal()">Понятно</button>
+        </div>
+      </div>
+    <footer class="footer">
+    <p>
+      &copy; 2026 Ansuz. Все права защищены. |
+      <a href="terms.html">Условия использования</a> |
+      <a href="privacy.html">Политика конфиденциальности</a>
+    </p>
+  </footer>
+    </div>
+  </body>
+
+
+
+  <script src="scripts/mock-users.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script>
+    (function () {
+      const user = authProvider.currentUser();
+
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const initials = ((user.firstName || user.username)[0] || "?").toUpperCase();
+      document.getElementById("accountAvatar").textContent = initials;
+      document.getElementById("accountUsername").textContent = "@" + user.username;
+      document.getElementById("accountEmail").textContent = user.email;
+      document.getElementById("accountFirstName").textContent = user.firstName || "—";
+      document.getElementById("accountLastName").textContent = user.lastName || "—";
+      document.getElementById("accountEmailFull").textContent = user.email;
+
+      const navAccount = document.getElementById("navAccount");
+      if (navAccount) navAccount.textContent = user.username;
+    })();
+
+    function handleLogout() {
+      authProvider.logout();
+      window.location.href = "login.html";
+    }
+
+    function openEditModal() {
+      const user = authProvider.currentUser();
+      if (!user) return;
+
+      document.getElementById("editUsername").value  = user.username  || "";
+      document.getElementById("editFirstName").value = user.firstName || "";
+      document.getElementById("editLastName").value  = user.lastName  || "";
+      document.getElementById("editEmail").value     = user.email     || "";
+
+      const msgEl = document.getElementById("editMessage");
+      msgEl.style.display = "none";
+      msgEl.textContent   = "";
+
+      document.getElementById("editModal").style.display = "flex";
+    }
+
+    function closeEditModal() {
+      document.getElementById("editModal").style.display = "none";
+    }
+
+    document.getElementById("editForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const currentUser = authProvider.currentUser();
+      const msgEl       = document.getElementById("editMessage");
+
+      const newUsername  = document.getElementById("editUsername").value.trim();
+      const newFirstName = document.getElementById("editFirstName").value.trim();
+      const newLastName  = document.getElementById("editLastName").value.trim();
+      const newEmail     = document.getElementById("editEmail").value.trim();
+
+      if (!newUsername || !newEmail) {
+        msgEl.textContent   = "Имя пользователя и email обязательны.";
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
+
+      // Обновляем данные в хранилище пользователей
+      const users = authProvider.getUsers();
+      const idx   = users.findIndex(function (u) { return u.email === currentUser.email; });
+
+      if (idx === -1) {
+        msgEl.textContent   = "Пользователь не найден.";
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
+
+      const emailTaken    = users.some(function (u, i) { return i !== idx && u.email    === newEmail; });
+      const usernameTaken = users.some(function (u, i) { return i !== idx && u.username === newUsername; });
+
+      if (emailTaken) {
+        msgEl.textContent   = "Этот email уже используется другим пользователем.";
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
+      if (usernameTaken) {
+        msgEl.textContent   = "Это имя пользователя уже занято.";
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
+
+      users[idx].username  = newUsername;
+      users[idx].firstName = newFirstName;
+      users[idx].lastName  = newLastName;
+      users[idx].email     = newEmail;
+      authProvider.saveUsers(users);
+
+      // Обновляем сессию
+      const newSession = {
+        username: newUsername, email: newEmail,
+        firstName: newFirstName, lastName: newLastName,
+      };
+      localStorage.setItem("ansuz_session", JSON.stringify(newSession));
+
+      const initials = ((newFirstName || newUsername)[0] || "?").toUpperCase();
+      document.getElementById("accountAvatar").textContent    = initials;
+      document.getElementById("accountUsername").textContent  = "@" + newUsername;
+      document.getElementById("accountEmail").textContent     = newEmail;
+      document.getElementById("accountFirstName").textContent = newFirstName || "—";
+      document.getElementById("accountLastName").textContent  = newLastName  || "—";
+      document.getElementById("accountEmailFull").textContent = newEmail;
+      document.getElementById("navAccount").textContent       = newUsername;
+
+      msgEl.textContent   = "Изменения сохранены!";
+      msgEl.className     = "auth-message auth-message--success";
+      msgEl.style.display = "block";
+    });
+
+    window.addEventListener("click", function (e) {
+      if (e.target === document.getElementById("editModal"))    closeEditModal();
+      if (e.target === document.getElementById("projectsModal")) closeProjectsModal();
+    });
+
+    function handleProjectsStub() {
+      document.getElementById("projectsModal").style.display = "flex";
+    }
+
+    function closeProjectsModal() {
+      document.getElementById("projectsModal").style.display = "none";
+    }
+  </script>
+</html>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ansuz – Регистрация</title>
-    <link rel="stylesheet" href="themes.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="icon.png" />
-    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" type="image/png" href="icons/icon.png" />
+    <link rel="apple-touch-icon" href="icons/icon.png" />
     <meta name="theme-color" content="#bb86fc" />
     <meta name="msapplication-TileColor" content="#bb86fc" />
-    <meta name="msapplication-TileImage" content="icon.png" />
+    <meta name="msapplication-TileImage" content="icons/icon.png" />
+    <script>if (localStorage.getItem("ansuz_session")) location.replace("account.html");</script>
   </head>
   <body>
     <div class="container">
@@ -25,19 +25,18 @@
           <h1>Ansuz</h1>
         </a>
         <nav>
-          <a href="index.html" class="nav-link">Главная</a>
-          <a href="about.html" class="nav-link">О нас</a>
-          <a href="app.html" class="nav-link">О приложении</a>
-          <a href="download.html" class="nav-link">Скачать</a>
-          <a href="login.html" class="nav-link active">Аккаунт</a>
+          <a href="index.html" class="nav-link" data-page="index">Главная</a>
+          <a href="about.html" class="nav-link" data-page="about">О нас</a>
+          <a href="app.html" class="nav-link" data-page="app">О приложении</a>
+          <a href="download.html" class="nav-link" data-page="download">Скачать</a>
+          <a href="login.html" class="nav-link" data-page="account" id="navAccount" style="display: flex; align-items: center;">Аккаунт <img src="icons/account.svg" alt="account" style="height: 21px; margin-left: 5px;"/></a>
         </nav>
-    </header>
-
-    <body>
+      </header>
       <main>
         <section class="auth-section">
           <div class="auth-container">
             <h1>Создание аккаунта</h1>
+            <div id="authMessage" class="auth-message" style="display:none"></div>
             <form id="registerForm">
               <div class="form-group">
                 <label for="username">Имя пользователя</label>
@@ -49,16 +48,27 @@
               </div>
               <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="password" id="password" name="password" required />
+                <div class="password-wrapper">
+                  <input type="password" id="password" name="password" required />
+                  <button type="button" class="password-toggle" onclick="togglePassword('password', this)" aria-label="Показать пароль">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="form-group">
                 <label for="confirmPassword">Подтвердите пароль</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  required
-                />
+                <div class="password-wrapper">
+                  <input type="password" id="confirmPassword" name="confirmPassword" required />
+                  <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)" aria-label="Показать пароль">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="form-group">
                 <label for="firstName">Имя</label>
@@ -72,18 +82,12 @@
                 <input type="checkbox" id="terms" name="terms" required />
                 <label for="terms"
                   >Я принимаю
-                  <a href="terms.html" style="text-decoration: none"
-                    >Условия использования</a
-                  >
+                  <a href="terms.html" style="text-decoration: none">Условия использования</a>
                   и
-                  <a href="conf.html" style="text-decoration: none"
-                    >Политику конфиденциальности</a
-                  ></label
+                  <a href="privacy.html" style="text-decoration: none">Политику конфиденциальности</a></label
                 >
               </div>
-              <button type="submit" class="btn btn-primary">
-                Создать аккаунт
-              </button>
+              <button type="submit" class="btn btn-primary">Создать аккаунт</button>
             </form>
             <p class="auth-link">
               Уже есть аккаунт? <a href="login.html">Войти</a>
@@ -91,43 +95,69 @@
           </div>
         </section>
       </main>
-    </body>
+      <footer class="footer">
+        <p>
+          &copy; 2026 Ansuz. Все права защищены. |
+          <a href="terms.html">Условия использования</a> |
+          <a href="privacy.html">Политика конфиденциальности</a>
+        </p>
+      </footer>
+    </div>
+  </body>
 
-    <footer class="footer">
-      <p>
-        &copy; 2026 Ansuz. Все права защищены. |
-        <a href="terms.html">Условия использования</a> |
-        <a href="privacy.html">Политика конфиденциальности</a>
-      </p>
-    </footer>
+  <script src="scripts/mock-users.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script>
+    function togglePassword(inputId, btn) {
+      var input = document.getElementById(inputId);
+      var isHidden = input.type === "password";
+      input.type = isHidden ? "text" : "password";
+      btn.innerHTML = isHidden
+        ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.293-3.95M6.938 6.938A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.956 9.956 0 01-1.476 2.754M6.938 6.938L3 3m3.938 3.938L17.06 17.06M17.06 17.06L21 21"/></svg>'
+        : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>';
+    }
 
-    <script>
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-          const username = document.getElementById("username").value;
-          const email = document.getElementById("email").value;
-          const password = document.getElementById("password").value;
-          const confirmPassword =
-            document.getElementById("confirmPassword").value;
+      const username        = document.getElementById("username").value.trim();
+      const email           = document.getElementById("email").value.trim();
+      const password        = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const firstName       = document.getElementById("firstName").value.trim();
+      const lastName        = document.getElementById("lastName").value.trim();
+      const msgEl           = document.getElementById("authMessage");
 
-          if (password !== confirmPassword) {
-            alert("Пароли не совпадают!");
-            return;
-          }
+      if (password !== confirmPassword) {
+        msgEl.textContent   = "Пароли не совпадают!";
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
 
-          if (password.length < 6) {
-            alert("Пароль должен быть не менее 6 символов!");
-            return;
-          }
+      if (password.length < 6) {
+        msgEl.textContent   = "Пароль должен быть не менее 6 символов!";
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
 
-          alert(
-            "Регистрация прошла успешно! Добро пожаловать, " + username + "!",
-          );
-          // Здесь можно добавить отправку данных на сервер
-        });
-    </script>
-  </div>
+      const result = authProvider.register({ username, email, password, firstName, lastName });
+
+      if (!result.ok) {
+        msgEl.textContent   = result.error;
+        msgEl.className     = "auth-message auth-message--error";
+        msgEl.style.display = "block";
+        return;
+      }
+
+      msgEl.textContent   = "Аккаунт создан! Добро пожаловать, " + result.user.username + "! Перенаправляем…";
+      msgEl.className     = "auth-message auth-message--success";
+      msgEl.style.display = "block";
+
+      setTimeout(function () {
+        window.location.href = "account.html";
+      }, 1000);
+    });
+  </script>
 </html>
