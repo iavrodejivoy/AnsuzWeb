@@ -89,13 +89,13 @@
   background: var(--bg-primary);
   border-radius: 8px;
   color: #e0e0e0;
+  font-size: 18px;
 }
 
 .about-section h1 {
   color: #bb86fc;
   font-size: 42px;
-  margin: 0;
-  margin-bottom: 15px;
+  margin: 0 0 15px 0;
   text-align: center;
 }
 
@@ -107,28 +107,22 @@
 
 .about-section h3 {
   color: var(--text-secondary);
-  margin: 0;
-  margin-top: 15px;
+  margin: 15px 0 0 0;
 }
 
 .about-section p {
-  font-size: 18px;
-  margin-bottom: 20px;
   color: var(--text-secondary);
   text-align: justify;
 }
 
 .about-section li {
-  font-size: 18px;
   color: var(--text-secondary);
   text-align: justify;
 }
 
 .about-section a {
-  font-size: 18px;
   text-decoration: none;
   color: var(--text-primary);
-  text-align: justify;
 }
 
 .about-section hr {

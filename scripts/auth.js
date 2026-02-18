@@ -39,7 +39,7 @@ const mockProvider = {
     if (!user) {
       return { ok: false, error: "Неверный email или пароль." };
     }
-    
+
     const session = {
       username: user.username,
       email: user.email,
@@ -86,42 +86,135 @@ const mockProvider = {
   },
 };
 
-// ─── API-провайдер (заглушка для будущего PostgreSQL) ─────────────────────────
-// Раскомментируйте и доработайте, когда будет готов бэкенд.
-/*
+// API-провайдер (PostgreSQL через REST API)
+
+const API_BASE = "http://localhost:3001/api";
+
 const apiProvider = {
-  init() {},
+  init() {
+    // сервер стартует сам
+  },
+
+  /**
+   * Вход по email + password.
+   * @returns {{ ok: boolean, user?: object, error?: string }}
+   */
   async login(email, password) {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (!res.ok) return { ok: false, error: data.error };
-    localStorage.setItem("ansuz_session", JSON.stringify(data.user));
-    return { ok: true, user: data.user };
+    try {
+      const res = await fetch(`${API_BASE}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) return { ok: false, error: data.error };
+
+      localStorage.setItem("ansuz_token", data.token);
+      localStorage.setItem("ansuz_session", JSON.stringify(data.user));
+      return { ok: true, user: data.user };
+    } catch {
+      return { ok: false, error: "Сервер недоступен. Попробуйте позже." };
+    }
   },
-  async register(payload) {
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const data = await res.json();
-    if (!res.ok) return { ok: false, error: data.error };
-    localStorage.setItem("ansuz_session", JSON.stringify(data.user));
-    return { ok: true, user: data.user };
+
+  /**
+   * Регистрация нового пользователя.
+   * @returns {{ ok: boolean, user?: object, error?: string }}
+   */
+  async register({ username, email, password, firstName, lastName }) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          firstName,
+          lastName,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) return { ok: false, error: data.error };
+
+      localStorage.setItem("ansuz_token", data.token);
+      localStorage.setItem("ansuz_session", JSON.stringify(data.user));
+      return { ok: true, user: data.user };
+    } catch {
+      return { ok: false, error: "Сервер недоступен. Попробуйте позже." };
+    }
   },
-  logout() { localStorage.removeItem("ansuz_session"); },
+
+  logout() {
+    localStorage.removeItem("ansuz_session");
+    localStorage.removeItem("ansuz_token");
+  },
+
   currentUser() {
     const raw = localStorage.getItem("ansuz_session");
     return raw ? JSON.parse(raw) : null;
   },
-};
-*/
 
-// ─── Активный провайдер ────────────────────────────────────────────────────────
-// Замените mockProvider на apiProvider для перехода на бэкенд.
-window.authProvider = mockProvider;
+  /**
+   * Обновление профиля (username, email, firstName, lastName).
+   * @returns {{ ok: boolean, user?: object, error?: string }}
+   */
+  async updateProfile({ username, email, firstName, lastName }) {
+    const token = this.getToken();
+    if (!token) return { ok: false, error: "Не авторизован." };
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/profile`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ username, email, firstName, lastName }),
+      });
+      const data = await res.json();
+      if (!res.ok) return { ok: false, error: data.error };
+
+      localStorage.setItem("ansuz_token", data.token);
+      localStorage.setItem("ansuz_session", JSON.stringify(data.user));
+      return { ok: true, user: data.user };
+    } catch {
+      return { ok: false, error: "Сервер недоступен. Попробуйте позже." };
+    }
+  },
+
+  /**
+   * Активация премиума на 1 месяц.
+   * @returns {{ ok: boolean, user?: object, error?: string }}
+   */
+  async activatePremium() {
+    const token = this.getToken();
+    if (!token) return { ok: false, error: "Не авторизован." };
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/premium`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) return { ok: false, error: data.error };
+
+      localStorage.setItem("ansuz_token", data.token);
+      localStorage.setItem("ansuz_session", JSON.stringify(data.user));
+      return { ok: true, user: data.user };
+    } catch {
+      return { ok: false, error: "Сервер недоступен. Попробуйте позже." };
+    }
+  },
+
+  // Возвращает JWT-токен
+  getToken() {
+    return localStorage.getItem("ansuz_token");
+  },
+};
+
+window.authProvider = apiProvider;
 window.authProvider.init();

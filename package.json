@@ -5,12 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "inject": "node scripts/inject-partials.js"
+    "inject": "node scripts/inject-partials.js",
+    "server": "node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "markdown-it": "^14.1.1"
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "markdown-it": "^14.1.1",
+    "pg": "^8.18.0"
   }
 }
